@@ -8,30 +8,23 @@ fun main() {
 		findFirstAndLastDigits(line)
 	}
 
-	fun String.replaceFirstAndLast(matchings: List<Pair<String, String>>): String {
-		val str1  = findAnyOf(matchings.map { it.first }, ignoreCase = true)?.let { (_, firstNum) ->
-			this.replace(firstNum, matchings.toMap()[firstNum]!! + firstNum, ignoreCase = true)
-		} ?: this
-
-		return str1.findLastAnyOf(matchings.map { it.first }, ignoreCase = true)?.let { (lastNumIndex, lastNum) ->
-			str1.replaceRange(lastNumIndex, lastNumIndex+(lastNum.length), matchings.toMap()[lastNum]!!)
-		} ?: str1
-	}
+	fun String.replacePairs(pairs: List<Pair<String, String>>) =
+		pairs.fold(this) { acc, (it1, it2) -> acc.replace(it1, it2, true) }
 
 	val matchingPairs = listOf(
-		"one" to "1",
-		"two" to "2",
-		"three" to "3",
-		"four" to "4",
-		"five" to "5",
-		"six" to "6",
-		"seven" to "7",
-		"eight" to "8",
-		"nine" to "9",
+		"one" to "o1e",
+		"two" to "t2o",
+		"three" to "t3e",
+		"four" to "f4r",
+		"five" to "f5e",
+		"six" to "s6x",
+		"seven" to "s7n",
+		"eight" to "e8t",
+		"nine" to "n9e",
 	)
 
 	fun part2(input: List<String>) = input.sumOf { line ->
-		findFirstAndLastDigits(line.replaceFirstAndLast(matchingPairs))
+		findFirstAndLastDigits(line.replacePairs(matchingPairs))
 	}
 
 	val testInput = readInput("Day01_test")
