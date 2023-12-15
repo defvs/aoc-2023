@@ -30,3 +30,10 @@ fun String.substringBetween(after: Char, before: Char) = this.substringAfter(aft
 fun <T> List<List<T>>.transpose(): List<List<T>> {
 	return (this[0].indices).map { i -> (this.indices).map { j -> this[j][i] } }
 }
+
+/**
+ * Given an array of arrays (ie a matrix), transpose it
+ */
+inline fun <reified T> Array<Array<T>>.transpose(): Array<Array<T>> {
+	return (this[0].indices).map { i -> (this.indices).map { j -> this[j][i] }.toTypedArray() }.toTypedArray()
+}
