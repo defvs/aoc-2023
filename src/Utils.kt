@@ -4,6 +4,8 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Reads lines from the given input txt file.
@@ -37,3 +39,5 @@ fun <T> List<List<T>>.transpose(): List<List<T>> {
 inline fun <reified T> Array<Array<T>>.transpose(): Array<Array<T>> {
 	return (this[0].indices).map { i -> (this.indices).map { j -> this[j][i] }.toTypedArray() }.toTypedArray()
 }
+
+fun IntRange.intersect(other: IntRange) = IntRange(max(this.first, other.first), min(this.last, other.last))
